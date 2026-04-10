@@ -7,7 +7,7 @@
   <meta name="description" content="Therese Fallentin hjelper ledere og team med å kommunisere klart, forstå hverandre på tvers av generasjoner og unngå utbrenthet. Ingen omsvøp. Bare det som er sant." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,6 +22,7 @@
             bark:   '#2D2016',
             taupe:  '#8A7B72',
             linen:  '#E8DDD4',
+            warm:   '#3D2E22',
           },
           fontFamily: {
             serif: ['"Playfair Display"', 'Georgia', 'serif'],
@@ -35,86 +36,126 @@
     html { scroll-behavior: smooth; }
     body { background-color: #FAF5EE; color: #2D2016; }
     ::selection { background: #D9A89E; color: #2D2016; }
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
-    .fade-up.visible { opacity: 1; transform: none; }
-    .btn-primary { background: #C4604A; color: #FAF5EE; padding: 14px 32px; font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.25s; display: inline-block; text-align: center; }
-    .btn-primary:hover { background: #2D2016; }
-    .btn-outline { border: 1.5px solid #C4604A; color: #C4604A; padding: 13px 32px; font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.25s; display: inline-block; text-align: center; }
-    .btn-outline:hover { background: #C4604A; color: #FAF5EE; }
-    input, textarea { font-family: 'Jost', sans-serif; }
+
+    /* Fade-up — disabled on mobile to avoid invisible content */
+    @media (min-width: 768px) {
+      .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+      .fade-up.visible { opacity: 1; transform: none; }
+    }
+
+    .btn-primary {
+      background: #C4604A; color: #FAF5EE;
+      padding: 16px 28px;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.25s; display: block; text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary:hover, .btn-primary:active { background: #2D2016; }
+
+    .btn-outline {
+      border: 1.5px solid #C4604A; color: #C4604A;
+      padding: 15px 28px;
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: all 0.25s; display: block; text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-outline:hover, .btn-outline:active { background: #C4604A; color: #FAF5EE; }
+
+    @media (min-width: 640px) {
+      .btn-primary, .btn-outline { display: inline-block; }
+    }
+
+    input, textarea { font-family: 'Jost', sans-serif; font-size: 16px; }
     input:focus, textarea:focus { outline: none; border-color: #C4604A; }
-    /* Decorative line */
-    .deco-line::before { content: ''; display: block; width: 40px; height: 2px; background: #C4604A; margin-bottom: 20px; }
+
+    .deco-line::before {
+      content: ''; display: block;
+      width: 36px; height: 2px;
+      background: #C4604A; margin-bottom: 16px;
+    }
+
+    /* Mobile nav menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
   </style>
 </head>
 <body class="font-sans antialiased">
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-linen">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="/" class="font-serif text-xl text-bark tracking-wide">Therese Fallentin</a>
-      <div class="hidden md:flex items-center gap-8 text-sm text-taupe font-sans">
-        <a href="#om" class="hover:text-bark transition-colors tracking-wide">Om meg</a>
-        <a href="#hva" class="hover:text-bark transition-colors tracking-wide">Hva jeg gjør</a>
-        <a href="#tjenester" class="hover:text-bark transition-colors tracking-wide">Tjenester</a>
-        <a href="#kontakt" class="btn-primary text-xs">Book sesjon</a>
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/97 backdrop-blur-sm border-b border-linen">
+    <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+      <a href="/" class="font-serif text-lg text-bark">Therese Fallentin</a>
+      <!-- Desktop -->
+      <div class="hidden md:flex items-center gap-7 text-sm text-taupe">
+        <a href="#om" class="hover:text-bark transition-colors">Om meg</a>
+        <a href="#hva" class="hover:text-bark transition-colors">Hva jeg gjør</a>
+        <a href="#tjenester" class="hover:text-bark transition-colors">Tjenester</a>
+        <a href="#kontakt" class="btn-primary text-xs px-5 py-2.5">Book sesjon</a>
       </div>
-      <a href="#kontakt" class="md:hidden btn-primary text-xs">Book</a>
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" onclick="toggleMenu()" class="md:hidden p-2 text-bark" aria-label="Meny">
+        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <!-- Mobile menu dropdown -->
+    <div id="mobile-menu" class="md:hidden flex-col bg-cream border-t border-linen px-5 py-4 gap-0">
+      <a href="#om" onclick="toggleMenu()" class="block py-4 text-bark border-b border-linen text-base">Om meg</a>
+      <a href="#hva" onclick="toggleMenu()" class="block py-4 text-bark border-b border-linen text-base">Hva jeg gjør</a>
+      <a href="#tjenester" onclick="toggleMenu()" class="block py-4 text-bark border-b border-linen text-base">Tjenester</a>
+      <a href="#kontakt" onclick="toggleMenu()" class="btn-primary mt-4 text-sm">Book sesjon</a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="min-h-screen pt-16 flex flex-col lg:flex-row">
-    <!-- Left: text -->
-    <div class="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20 py-20 lg:py-0 order-2 lg:order-1">
-      <div class="max-w-lg">
-        <p class="text-terra text-xs font-sans font-medium tracking-[0.2em] uppercase mb-6">Strategisk sparringspartner</p>
-        <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-bark mb-8">
-          Ikke noe annet<br />
-          <em class="text-terra">enn det jeg er.</em>
-        </h1>
-        <p class="text-taupe text-lg leading-relaxed mb-10 font-light">
-          Tydelig. Direkte. Uten omsvøp.<br />
-          Jeg hjelper ledere og team å kommunisere klart, forstå hverandre på tvers av generasjoner — og faktisk komme videre.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#kontakt" class="btn-primary">Book en strategisesjon</a>
-          <a href="#hva" class="btn-outline">Les mer</a>
-        </div>
-      </div>
-    </div>
-    <!-- Right: photo -->
-    <div class="flex-1 order-1 lg:order-2 min-h-[50vh] lg:min-h-screen relative overflow-hidden bg-blush">
+  <section class="pt-14 flex flex-col lg:flex-row lg:min-h-screen">
+    <!-- Photo — top on mobile -->
+    <div class="lg:flex-1 lg:order-2 h-[55vw] min-h-[280px] max-h-[520px] lg:max-h-none lg:h-auto relative overflow-hidden bg-blush">
       <img src="/static/therese.jpg" alt="Therese Fallentin"
-           class="w-full h-full object-cover object-center"
+           class="w-full h-full object-cover object-top"
            style="filter: saturate(1.05) contrast(1.02);" />
-      <div class="absolute inset-0 bg-gradient-to-t from-blush/30 via-transparent to-transparent pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-blush/20 via-transparent to-transparent pointer-events-none"></div>
+    </div>
+    <!-- Text — below photo on mobile, left on desktop -->
+    <div class="lg:flex-1 lg:order-1 flex flex-col justify-center px-5 md:px-10 lg:px-16 py-10 lg:py-0">
+      <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase mb-4">Strategisk sparringspartner</p>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-bark mb-6">
+        Ikke noe annet<br />
+        <em class="text-terra">enn det jeg er.</em>
+      </h1>
+      <p class="text-taupe text-base md:text-lg leading-relaxed mb-8 font-light max-w-md">
+        Tydelig. Direkte. Uten omsvøp. Jeg hjelper ledere og team å kommunisere klart, forstå hverandre på tvers av generasjoner — og faktisk komme videre.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="#kontakt" class="btn-primary">Book en strategisesjon</a>
+        <a href="#hva" class="btn-outline">Les mer</a>
+      </div>
     </div>
   </section>
 
   <!-- SITAT STRIPE -->
-  <div class="bg-terra py-10 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="font-serif text-2xl md:text-3xl text-cream italic leading-relaxed">
-        "Jeg lytter etter det som ikke sies. Speiler det jeg ser. Og hjelper deg å sette ord på det som er sant."
-      </p>
-    </div>
+  <div class="bg-terra py-8 px-5">
+    <p class="font-serif text-xl md:text-2xl lg:text-3xl text-cream italic leading-relaxed text-center max-w-3xl mx-auto">
+      "Jeg lytter etter det som ikke sies. Speiler det jeg ser. Og hjelper deg å sette ord på det som er sant."
+    </p>
   </div>
 
   <!-- PROBLEMET -->
-  <section class="py-24 md:py-32 px-6 bg-ivory">
+  <section class="py-16 md:py-24 px-5 bg-ivory">
     <div class="max-w-6xl mx-auto">
-      <div class="fade-up deco-line mb-4">
+      <div class="deco-line fade-up mb-2">
         <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase">Kjenner du deg igjen?</p>
       </div>
-      <h2 class="font-serif text-4xl md:text-5xl text-bark mb-16 max-w-2xl leading-tight fade-up">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-bark mb-10 leading-tight fade-up">
         Det du egentlig<br /><em>sitter med.</em>
       </h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {% for item in problems %}
-        <div class="fade-up bg-cream p-8 border border-linen hover:border-rose transition-colors">
-          <p class="text-terra text-2xl mb-4">{{ item.icon }}</p>
-          <h3 class="font-serif text-lg text-bark mb-3">{{ item.title }}</h3>
+        <div class="fade-up bg-cream p-6 border border-linen">
+          <p class="text-terra text-2xl mb-3">{{ item.icon }}</p>
+          <h3 class="font-serif text-base text-bark mb-2">{{ item.title }}</h3>
           <p class="text-taupe text-sm leading-relaxed font-light">{{ item.desc }}</p>
         </div>
         {% endfor %}
@@ -123,30 +164,30 @@
   </section>
 
   <!-- HVA JEG GJØR -->
-  <section id="hva" class="py-24 md:py-32 px-6 bg-cream">
+  <section id="hva" class="py-16 md:py-24 px-5 bg-cream">
     <div class="max-w-6xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div class="fade-up">
           <div class="deco-line">
             <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase">Hva jeg gjør</p>
           </div>
-          <h2 class="font-serif text-4xl md:text-5xl text-bark mb-8 leading-tight">
+          <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-bark mb-6 leading-tight">
             Jeg ser mønsteret.<br /><em>Du tar valget.</em>
           </h2>
-          <p class="text-taupe text-lg leading-relaxed mb-8 font-light">
+          <p class="text-taupe text-base leading-relaxed mb-5 font-light">
             Jeg er ikke terapeut. Ikke coach. Ikke en som holder rommet ditt varmt mens du tenker høyt.
           </p>
-          <p class="text-taupe text-lg leading-relaxed mb-8 font-light">
+          <p class="text-taupe text-base leading-relaxed mb-5 font-light">
             Jeg er en strategisk sparringspartner som hjelper deg å se hva som faktisk er sant — og hva du kan gjøre med det.
           </p>
-          <p class="text-bark font-medium">Ingen omsvøp. Bare det du trenger å høre.</p>
+          <p class="text-bark font-medium text-base">Ingen omsvøp. Bare det du trenger å høre.</p>
         </div>
-        <div class="fade-up space-y-6">
+        <div class="fade-up space-y-4">
           {% for step in approach %}
-          <div class="flex gap-6 items-start p-6 bg-ivory border border-linen">
-            <span class="font-serif text-4xl text-rose leading-none flex-shrink-0">{{ step.num }}</span>
+          <div class="flex gap-5 items-start p-5 bg-ivory border border-linen">
+            <span class="font-serif text-3xl text-rose leading-none flex-shrink-0 mt-0.5">{{ step.num }}</span>
             <div>
-              <h3 class="font-serif text-lg text-bark mb-2">{{ step.title }}</h3>
+              <h3 class="font-serif text-base text-bark mb-1.5">{{ step.title }}</h3>
               <p class="text-taupe text-sm leading-relaxed font-light">{{ step.desc }}</p>
             </div>
           </div>
@@ -157,40 +198,41 @@
   </section>
 
   <!-- OM MEG -->
-  <section id="om" class="py-24 md:py-32 px-6 bg-blush">
+  <section id="om" class="py-16 md:py-24 px-5 bg-blush">
     <div class="max-w-6xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div class="fade-up">
           <div class="deco-line">
             <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase">Om meg</p>
           </div>
-          <h2 class="font-serif text-4xl md:text-5xl text-bark mb-8 leading-tight">
+          <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-bark mb-6 leading-tight">
             Jeg har vært der<br /><em>du er nå.</em>
           </h2>
-          <div class="space-y-5 text-taupe font-light leading-relaxed text-base">
+          <div class="space-y-4 text-taupe font-light leading-relaxed text-base">
             <p>Jeg er Therese. 33 år, fra Stavanger, bosatt i Oslo. Master i Management Science fra Brussel. Over ti år med organisasjoner, ledere og menneskelig dynamikk.</p>
             <p>Jeg vet hva det vil si å stå i det. Å bære andres forventninger. Å snakke rundt det vanskelige istedenfor om det. Å gå på eggeskall i egne møter.</p>
-            <p class="text-bark font-medium text-lg">Det er ikke der du trenger å bli.</p>
+            <p class="text-bark font-medium text-base">Det er ikke der du trenger å bli.</p>
             <p>Jeg hjelper deg å eie din egen fortelling, bli tydelig i kommunikasjonen og ta ansvar for det du faktisk kan gjøre noe med.</p>
           </div>
-          <div class="mt-10 flex flex-wrap gap-3">
+          <div class="mt-8 flex flex-wrap gap-2">
             {% for tag in tags %}
-            <span class="bg-cream border border-linen text-taupe text-xs font-sans px-4 py-2 rounded-full tracking-wide">{{ tag }}</span>
+            <span class="bg-cream border border-linen text-taupe text-xs font-sans px-3 py-1.5 rounded-full">{{ tag }}</span>
             {% endfor %}
           </div>
         </div>
-        <div class="fade-up space-y-5">
+        <div class="fade-up space-y-4">
           {% for q in quotes %}
-          <div class="bg-cream p-7 border-l-2 border-rose">
-            <p class="font-serif text-lg text-bark italic leading-relaxed mb-3">"{{ q.text }}"</p>
+          <div class="bg-cream p-6 border-l-2 border-rose">
+            <p class="font-serif text-base text-bark italic leading-relaxed mb-3">"{{ q.text }}"</p>
             <p class="text-taupe text-xs tracking-wide font-light">— {{ q.who }}</p>
           </div>
           {% endfor %}
-          <a href="https://magefolelsen.com" target="_blank" class="flex items-center gap-4 bg-terra/10 border border-terra/20 p-6 hover:border-terra/50 transition-colors">
-            <span class="text-2xl">🎙</span>
+          <a href="https://magefolelsen.com" target="_blank"
+             class="flex items-center gap-4 bg-terra/10 border border-terra/20 p-5 active:bg-terra/20 transition-colors">
+            <span class="text-2xl flex-shrink-0">🎙</span>
             <div>
               <p class="text-bark font-medium text-sm">Hør podkasten Magefølelsen</p>
-              <p class="text-taupe text-xs font-light mt-1">Følg magefølelsen din — ikke forventningene til andre</p>
+              <p class="text-taupe text-xs font-light mt-0.5">Følg magefølelsen din — ikke forventningene til andre</p>
             </div>
           </a>
         </div>
@@ -199,51 +241,49 @@
   </section>
 
   <!-- TJENESTER -->
-  <section id="tjenester" class="py-24 md:py-32 px-6 bg-cream">
+  <section id="tjenester" class="py-16 md:py-24 px-5 bg-cream">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16 fade-up">
-        <div class="inline-block">
-          <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase mb-4">Tjenester</p>
-          <h2 class="font-serif text-4xl md:text-5xl text-bark leading-tight">
-            Slik jobber<br /><em>vi sammen.</em>
-          </h2>
-        </div>
+      <div class="text-center mb-10 fade-up">
+        <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase mb-3">Tjenester</p>
+        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-bark leading-tight">
+          Slik jobber<br /><em>vi sammen.</em>
+        </h2>
       </div>
-      <div class="grid md:grid-cols-3 gap-6 mb-10">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         {% for s in services %}
-        <div class="fade-up bg-ivory border border-linen p-8 flex flex-col hover:border-rose transition-colors">
-          <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase mb-5">{{ s.tag }}</p>
-          <h3 class="font-serif text-2xl text-bark mb-4 leading-snug">{{ s.title }}</h3>
-          <p class="text-taupe text-sm leading-relaxed font-light flex-1 mb-8">{{ s.desc }}</p>
-          <a href="#kontakt" class="text-terra text-sm font-medium hover:text-bark transition-colors">Book nå →</a>
+        <div class="fade-up bg-ivory border border-linen p-6 flex flex-col">
+          <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase mb-4">{{ s.tag }}</p>
+          <h3 class="font-serif text-xl text-bark mb-3 leading-snug">{{ s.title }}</h3>
+          <p class="text-taupe text-sm leading-relaxed font-light flex-1 mb-6">{{ s.desc }}</p>
+          <a href="#kontakt" class="text-terra text-sm font-medium">Book nå →</a>
         </div>
         {% endfor %}
       </div>
-      <div class="fade-up bg-blush border border-rose/30 p-8 md:p-10 text-center">
-        <p class="font-serif text-2xl text-bark mb-3">Ikke sikker på hva du trenger?</p>
-        <p class="text-taupe mb-6 font-light">Ta kontakt så finner vi ut av det sammen.</p>
-        <a href="#kontakt" class="btn-primary">Send meg en melding</a>
+      <div class="fade-up bg-blush border border-rose/30 p-7 md:p-10 text-center">
+        <p class="font-serif text-xl md:text-2xl text-bark mb-2">Ikke sikker på hva du trenger?</p>
+        <p class="text-taupe mb-5 font-light text-sm">Ta kontakt så finner vi ut av det sammen.</p>
+        <a href="#kontakt" class="btn-primary sm:inline-block">Send meg en melding</a>
       </div>
     </div>
   </section>
 
   <!-- HVEM ER DET FOR -->
-  <section class="py-24 md:py-32 px-6 bg-[#3D2E22] text-cream">
+  <section class="py-16 md:py-24 px-5 bg-warm text-cream">
     <div class="max-w-6xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div class="fade-up">
-          <p class="text-rose text-xs font-medium tracking-[0.2em] uppercase mb-6">Hvem dette er for</p>
-          <h2 class="font-serif text-4xl md:text-5xl mb-8 leading-tight">
+          <p class="text-rose text-xs font-medium tracking-[0.2em] uppercase mb-5">Hvem dette er for</p>
+          <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight">
             Du som vil fremover,<br /><em class="text-rose">ikke bare forstå.</em>
           </h2>
-          <p class="text-cream/70 font-light text-lg leading-relaxed">
+          <p class="text-cream/75 font-light text-base leading-relaxed">
             Jeg jobber med ressurssterke, selvreflekterte voksne — ledere, fagfolk og team — som tåler ærlighet og vil ta ansvar for neste steg.
           </p>
         </div>
-        <div class="fade-up space-y-3">
+        <div class="fade-up space-y-2 mt-2 lg:mt-0">
           {% for fit in good_fit %}
-          <div class="flex items-start gap-4 p-5 border border-cream/10 hover:border-rose/40 transition-colors">
-            <span class="text-rose mt-0.5 flex-shrink-0">✓</span>
+          <div class="flex items-start gap-4 py-4 px-4 border border-cream/10">
+            <span class="text-rose flex-shrink-0 mt-0.5">✓</span>
             <p class="text-cream/80 font-light leading-relaxed text-sm">{{ fit }}</p>
           </div>
           {% endfor %}
@@ -253,53 +293,53 @@
   </section>
 
   <!-- KONTAKT -->
-  <section id="kontakt" class="py-24 md:py-32 px-6 bg-ivory">
+  <section id="kontakt" class="py-16 md:py-24 px-5 bg-ivory">
     <div class="max-w-6xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-16">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16">
         <div class="fade-up">
           <div class="deco-line">
             <p class="text-terra text-xs font-medium tracking-[0.2em] uppercase">Kom i gang</p>
           </div>
-          <h2 class="font-serif text-4xl md:text-5xl text-bark mb-6 leading-tight">
+          <h2 class="font-serif text-3xl md:text-4xl text-bark mb-5 leading-tight">
             La oss finne ut<br /><em>hva som låser seg.</em>
           </h2>
-          <p class="text-taupe font-light text-lg leading-relaxed mb-10">
+          <p class="text-taupe font-light text-base leading-relaxed mb-8">
             Skriv til meg. Fortell kort hva du sitter med. Jeg svarer innen 48 timer.
           </p>
-          <div class="space-y-4 text-sm">
+          <div class="space-y-3 text-sm">
             <p class="text-taupe font-light">📍 Oslo — og digitalt overalt</p>
-            <p><a href="https://magefolelsen.com" target="_blank" class="text-terra hover:text-bark transition-colors font-light">🎙 Podkasten: Magefølelsen</a></p>
-            <p><a href="https://www.linkedin.com/in/theresefallentin/" target="_blank" class="text-terra hover:text-bark transition-colors font-light">💼 LinkedIn</a></p>
-            <p><a href="https://www.instagram.com/magefoelelsen.podcast/" target="_blank" class="text-terra hover:text-bark transition-colors font-light">📸 Instagram</a></p>
+            <a href="https://magefolelsen.com" target="_blank" class="block text-terra font-light py-0.5">🎙 Podkasten: Magefølelsen</a>
+            <a href="https://www.linkedin.com/in/theresefallentin/" target="_blank" class="block text-terra font-light py-0.5">💼 LinkedIn</a>
+            <a href="https://www.instagram.com/magefoelelsen.podcast/" target="_blank" class="block text-terra font-light py-0.5">📸 Instagram</a>
           </div>
         </div>
         <div class="fade-up">
           {% if success %}
-          <div class="bg-cream border border-rose p-10 text-center">
+          <div class="bg-cream border border-rose p-8 text-center">
             <p class="font-serif text-3xl text-bark mb-3">Takk!</p>
             <p class="text-taupe font-light">Jeg svarer deg innen 48 timer.</p>
           </div>
           {% else %}
-          <form method="POST" action="/kontakt" class="space-y-5">
+          <form method="POST" action="/kontakt" class="space-y-4">
             <div>
               <label class="block text-taupe text-xs tracking-widest uppercase mb-2 font-light">Navn</label>
-              <input type="text" name="navn" required
-                class="w-full bg-cream border border-linen text-bark px-4 py-3 text-base transition-colors"
+              <input type="text" name="navn" required autocomplete="name"
+                class="w-full bg-cream border border-linen text-bark px-4 py-3.5 text-base transition-colors"
                 placeholder="Ditt navn" />
             </div>
             <div>
               <label class="block text-taupe text-xs tracking-widest uppercase mb-2 font-light">E-post</label>
-              <input type="email" name="epost" required
-                class="w-full bg-cream border border-linen text-bark px-4 py-3 text-base transition-colors"
+              <input type="email" name="epost" required autocomplete="email"
+                class="w-full bg-cream border border-linen text-bark px-4 py-3.5 text-base transition-colors"
                 placeholder="din@epost.no" />
             </div>
             <div>
               <label class="block text-taupe text-xs tracking-widest uppercase mb-2 font-light">Hva sitter du med?</label>
               <textarea name="melding" rows="5" required
-                class="w-full bg-cream border border-linen text-bark px-4 py-3 text-base transition-colors resize-none"
+                class="w-full bg-cream border border-linen text-bark px-4 py-3.5 text-base transition-colors resize-none"
                 placeholder="Beskriv kort hva du ønsker hjelp med..."></textarea>
             </div>
-            <button type="submit" class="btn-primary w-full">Send melding</button>
+            <button type="submit" class="btn-primary w-full text-sm">Send melding</button>
           </form>
           {% endif %}
         </div>
@@ -308,11 +348,11 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-linen py-10 px-6 bg-cream">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-taupe text-sm font-light">
+  <footer class="border-t border-linen py-8 px-5 bg-cream">
+    <div class="max-w-6xl mx-auto flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left text-taupe text-sm font-light">
       <span class="font-serif text-bark text-lg">Therese Fallentin</span>
       <span>© 2026 — Oslo, Norge</span>
-      <div class="flex gap-6">
+      <div class="flex gap-5">
         <a href="https://www.linkedin.com/in/theresefallentin/" target="_blank" class="hover:text-bark transition-colors">LinkedIn</a>
         <a href="https://magefolelsen.com" target="_blank" class="hover:text-bark transition-colors">Podkasten</a>
         <a href="https://www.instagram.com/magefoelelsen.podcast/" target="_blank" class="hover:text-bark transition-colors">Instagram</a>
@@ -321,6 +361,22 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const open = document.getElementById('icon-open');
+      const close = document.getElementById('icon-close');
+      menu.classList.toggle('open');
+      open.classList.toggle('hidden');
+      close.classList.toggle('hidden');
+    }
+    // Close menu on scroll
+    window.addEventListener('scroll', () => {
+      const menu = document.getElementById('mobile-menu');
+      if (menu.classList.contains('open')) toggleMenu();
+    }, { passive: true });
+
+    // Fade-up (desktop only — mobile shows immediately via CSS)
     const io = new IntersectionObserver((es) => {
       es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.08 });
