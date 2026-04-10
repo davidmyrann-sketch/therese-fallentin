@@ -47,6 +47,12 @@ TAGS = [
     "Utbrenthet",
 ]
 
+QUOTES = [
+    {"text": "Therese hjelper deg å se det du ikke klarer å se selv — og sier det rett ut.", "who": "Klient, leder i privat sektor"},
+    {"text": "Endelig noen som ikke bare validerer meg, men faktisk utfordrer meg til å tenke annerledes.", "who": "Klient, HR-direktør"},
+    {"text": "Etter én sesjon hadde jeg klarhet i noe jeg hadde gått rundt i måneder.", "who": "Klient, virksomhetsleder"},
+]
+
 GOOD_FIT = [
     "Du er leder og vil bli tydeligere i kommunikasjonen din",
     "Teamet ditt sliter med å forstå hverandre på tvers av generasjoner",
@@ -64,6 +70,7 @@ def index():
         services=SERVICES,
         tags=TAGS,
         good_fit=GOOD_FIT,
+        quotes=QUOTES,
         success=request.args.get('ok') == '1',
     )
 
