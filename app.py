@@ -85,7 +85,7 @@ def kontakt():
             body = f"Ny henvendelse fra theresefallentin.no\n\nNavn: {navn}\nE-post: {epost}\n\nMelding:\n{melding}"
             msg = MIMEMultipart()
             msg["From"]    = "master@goldenbusinessadvice.com"
-            msg["To"]      = "therese@empowermentdynamics.no"
+            msg["To"]      = "tfallentine@gmail.com"
             msg["Subject"] = f"Ny henvendelse: {navn}"
             msg.attach(MIMEText(body, "plain", "utf-8"))
             with smtplib.SMTP_SSL("smtp.domeneshop.no", 465, timeout=15) as s:
