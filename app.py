@@ -84,13 +84,14 @@ def kontakt():
         try:
             body = f"Ny henvendelse fra theresefallentin.no\n\nNavn: {navn}\nE-post: {epost}\n\nMelding:\n{melding}"
             msg = MIMEMultipart()
-            msg["From"]    = "master@goldenbusinessadvice.com"
+            msg["From"]    = "heidimybot@gmail.com"
             msg["To"]      = "tfallentine@gmail.com"
-            msg["Subject"] = f"Ny henvendelse: {navn}"
+            msg["Subject"] = f"Ny henvendelse fra theresefallentin.no: {navn}"
             msg.attach(MIMEText(body, "plain", "utf-8"))
-            with smtplib.SMTP_SSL("smtp.domeneshop.no", 465, timeout=15) as s:
-                s.login("master@goldenbusinessadvice.com",
-                        os.environ.get("SMTP_PASS", ""))
+            with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as s:
+                s.ehlo()
+                s.starttls()
+                s.login("heidimybot@gmail.com", "rdfsfbvwzbjahaia")
                 s.send_message(msg)
         except Exception as e:
             print(f"[email error] {e}")
